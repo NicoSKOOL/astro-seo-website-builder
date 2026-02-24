@@ -1,0 +1,13 @@
+{
+  "name": "website-builder",
+  "description": "Builds SEO-optimized Astro service business websites deployed to Cloudflare",
+  "version": "1.0.0",
+  "commands": [
+    { "name": "build-website", "path": "commands/build-website.md" }
+  ],
+  "agents": [
+    { "name": "seo-writer",   "path": "agents/seo-writer.md" },
+    { "name": "seo-auditor",  "path": "agents/seo-auditor.md" },
+    { "name": "tech-builder", "path": "agents/tech-builder.md" }
+  ]
+}
