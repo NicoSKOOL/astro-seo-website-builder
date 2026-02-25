@@ -1,0 +1,24 @@
+{
+  "name": "astro-seo-website-builder",
+  "version": "1.0.0",
+  "description": "Marketplace for the Astro SEO Website Builder plugin",
+  "owner": {
+    "name": "Nicolas Gorrono",
+    "email": "info@savvity.com.au"
+  },
+  "plugins": [
+    {
+      "name": "website-builder",
+      "source": "./plugins/website-builder",
+      "description": "Builds SEO-optimized Astro service business websites deployed to Cloudflare",
+      "version": "1.0.0",
+      "author": {
+        "name": "Nicolas Gorrono",
+        "url": "https://github.com/NicoSKOOL"
+      },
+      "category": "development",
+      "homepage": "https://github.com/NicoSKOOL/astro-seo-website-builder",
+      "keywords": ["seo", "astro", "website-builder", "cloudflare", "service-business"]
+    }
+  ]
+}
