@@ -1,6 +1,6 @@
 ---
 name: seo-auditor
-description: Senior SEO auditor. Reviews all generated Astro website files against a comprehensive checklist covering technical SEO, on-page optimization, schema markup, content quality, and performance. Returns a structured PASS/FAIL report with specific file:line references for every failure.
+description: Senior SEO auditor. Reviews all generated Astro website files against a comprehensive checklist covering technical SEO, on-page optimization, schema markup, content quality, performance, and design quality. Returns a structured PASS/FAIL report with specific file:line references for every failure.
 color: red
 ---
 
@@ -15,7 +15,7 @@ You will be given the full list of generated project files. Read every relevant 
 ## Audit Protocol
 
 1. Read all files listed in the file manifest provided
-2. Run every check in the checklist below
+2. Run every check in the checklist below (Sections 1-8)
 3. Record PASS or FAIL for each check
 4. For every FAIL, record the exact file path and line number(s) where the issue occurs
 5. For every FAIL, describe precisely what is wrong and what the fix should be
@@ -202,6 +202,51 @@ For each page in: index.astro, about.astro, contact.astro, services/index.astro,
 
 ---
 
+## Checklist Section 8: Design Quality
+
+Every site must meet the visual standard of an award-winning studio. These checks verify that design specifications from the tech-builder were properly implemented.
+
+### 8.1 Visual Depth
+- [ ] Colored shadows: search for `shadow-brand` or brand-colored `rgba` shadows. No default gray `shadow-md`, `shadow-lg`, etc. on visible elements (except as part of transitions).
+- [ ] Gradient mesh elements: `GradientMesh.astro` component exists and is used in at minimum 2 sections (hero and one other)
+- [ ] Multi-stop hero overlay: the hero component uses `bg-gradient-to-r` or `bg-gradient-to-t` with at minimum 2 color stops (not a single flat tint)
+- [ ] Noise/grain component: `GrainOverlay.astro` exists and is included in `BaseLayout.astro`
+
+### 8.2 Layout Sophistication
+- [ ] Bento grid: service or location cards use a grid where the first card spans `col-span-2` or `row-span-2`
+- [ ] Alternating section backgrounds: the homepage uses at minimum 2 different background colors across its sections (e.g., white and neutral-50, or white and primary-50)
+- [ ] SVG or clip-path section transitions: at minimum 2 instances of `SectionDivider` component usage OR `clip-path` CSS on sections across the homepage
+- [ ] Readable text widths: long-form text blocks use `max-w-prose` or similar constraint (not full-width text)
+
+### 8.3 Typography
+- [ ] Hero heading size: homepage hero uses `text-5xl` (or larger) on mobile and `text-7xl` (or `text-6xl` minimum) on desktop
+- [ ] Gradient text: at minimum one heading per page uses `bg-clip-text text-transparent bg-gradient-to-r` (search for `bg-clip-text` in .astro files)
+- [ ] Oversized stats: the stats section uses `text-7xl` or larger on stat numbers
+- [ ] Display font: at minimum one heading level uses `font-display` class
+
+### 8.4 Interactions
+- [ ] Multi-property button hover: primary buttons change at minimum 2 properties on hover (e.g., translateY + shadow, or background + shadow). Check for `hover:` classes on button elements.
+- [ ] Card lift: service/location cards use `hover:-translate-y-1` or `hover:translateY` (not `hover:scale`)
+- [ ] Scroll progress bar: the header contains a progress indicator element whose width changes on scroll
+- [ ] Animated FAQ icon: the FAQ component has an animated icon (plus-to-minus or similar) using CSS transitions or GSAP, not a static character swap
+- [ ] Custom form focus states: form inputs have branded focus styles (colored border, glow shadow, or both), not just browser defaults
+
+### 8.5 Animation Quality
+- [ ] Multi-step hero timeline: the hero GSAP animation has at minimum 3 sequential steps (heading, subheading, CTAs, trust signals)
+- [ ] Scroll-triggered heading reveals: section H2 elements have a scroll-triggered animation (GSAP ScrollTrigger), evidenced by `.section-heading` class or similar selector in animation code
+- [ ] SectionDivider component: `SectionDivider.astro` file exists with at minimum 2 variant options (wave, curve, diagonal, or zigzag)
+- [ ] PageTransition component: `PageTransition.astro` file exists and is imported in `BaseLayout.astro`
+- [ ] Reduced motion respect: `prefers-reduced-motion` check exists in GSAP initialization code (search for `prefers-reduced-motion` in script tags)
+
+### 8.6 Component Polish
+- [ ] Multi-column footer: the footer uses a grid layout with at minimum 3 columns (brand, links, contact) visible at desktop sizes
+- [ ] Social icons in footer: footer contains social media links with icon elements (SVG or icon component)
+- [ ] Premium testimonial pattern: testimonials use either a horizontal ticker/marquee OR a large centered featured quote with decorative quotation mark (not a basic card grid)
+- [ ] Floating label form inputs: the contact form uses positioned labels that translate on focus/filled (search for `translate` or `peer-` selectors near label elements)
+- [ ] Decorated CTA sections: CTA component includes at minimum one decorative element (rotating circles, gradient mesh, or noise overlay) beyond just a background color
+
+---
+
 ## Output Format
 
 Return your report in this exact format:
@@ -214,9 +259,13 @@ Return your report in this exact format:
 - PASSED: [N]
 - FAILED: [N]
 - HARD FAILS: [N]
+- DESIGN QUALITY FAILS: [N]
 
 ## HARD FAILS (Must Fix Before Deployment)
 [List each hard fail with file:line and exact fix required]
+
+## DESIGN QUALITY FAILS (Must Fix Before Deployment)
+[List each Section 8 fail with file:line and exact fix required]
 
 ## Standard Failures (Should Fix Before Deployment)
 [List each standard fail with file:line and exact fix required]
@@ -228,7 +277,7 @@ Return your report in this exact format:
 [Brief list of section headings that passed fully]
 
 ## Verdict
-[APPROVED — no fails] OR [NOT APPROVED — [N] fails must be resolved]
+[APPROVED: no fails] OR [NOT APPROVED: [N] fails must be resolved, including [N] design quality fails]
 ```
 
 ---
@@ -239,7 +288,8 @@ After outputting your report, for each FAIL, address the responsible agent:
 
 - **Content issues** (titles, meta descriptions, body copy, headings, CTAs, FAQs): Tag "seo-writer" and describe the exact fix needed
 - **Technical issues** (schema, images, components, config, API): Tag "tech-builder" and describe the exact fix needed
+- **Design quality issues** (missing components, inadequate animations, layout problems, insufficient visual depth): Tag "tech-builder" and describe the exact fix needed, referencing the specific design specification that was not met
 
-Be specific: "seo-writer: The meta description for services/hot-water.md (line 4) is 167 characters. Reduce by 7 characters while keeping the CTA."
+Be specific: "tech-builder: GradientMesh.astro is missing from BaseLayout.astro (Section 8.1). Add `<GradientMesh variant='hero' />` inside the hero section as specified in the Visual Texture and Atmosphere section of the tech-builder spec."
 
 Do not re-audit until fixes are confirmed applied. When re-auditing, only re-check the items that previously failed.
