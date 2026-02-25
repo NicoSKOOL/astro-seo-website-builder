@@ -1,6 +1,7 @@
 ---
 name: build-website
 description: Runs an onboarding questionnaire and builds a complete SEO-optimized Astro website for a service-based business, deploying to Cloudflare.
+allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "AskUserQuestion", "Task", "Skill"]
 ---
 
 # Website Builder Orchestrator

@@ -1,0 +1,13 @@
+{
+  "name": "website-builder",
+  "version": "1.0.0",
+  "description": "Builds SEO-optimized Astro service business websites deployed to Cloudflare",
+  "author": {
+    "name": "Nicolas Gorrono",
+    "url": "https://github.com/NicoSKOOL"
+  },
+  "repository": "https://github.com/NicoSKOOL/astro-seo-website-builder",
+  "keywords": ["seo", "astro", "website-builder", "cloudflare", "service-business"],
+  "commands": "./commands/",
+  "agents": "./agents/"
+}
